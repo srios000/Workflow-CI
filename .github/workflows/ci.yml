@@ -79,19 +79,13 @@ jobs:
       shell: bash -l {0}
       run: pip install gdown
 
-    - name: Upload to Google Drive
+    - name: Upload model files to GitHub Artifacts
       if: env.LATEST_RUN_ID != ''
-      shell: bash -l {0}
-      env:
-        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-      run: |
-        echo "$GDRIVE_CREDENTIALS_DATA" > credentials.json
-        mkdir -p models_to_upload
-        cp MLProject/models/*_model.pkl models_to_upload/ || echo "No model files found"
-        python -c "
-        import gdown
-        gdown.upload_folder('models_to_upload', id='${{ secrets.GDRIVE_FOLDER_ID }}', overwrite=True)
-        "
+      uses: actions/upload-artifact@v3
+      with:
+        name: wine-quality-model-${{ env.LATEST_RUN_ID }}
+        path: MLProject/models/
+        retention-days: 90
     
     - name: Build Docker model
       if: env.LATEST_RUN_ID != ''
