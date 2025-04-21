@@ -17,11 +17,11 @@ import mlflow
 import mlflow.sklearn
 import pandas as pd
 import numpy as np
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response
 from pydantic import BaseModel
 from typing import List, Optional
 import uvicorn
-from prometheus_client import start_http_server, Counter, Gauge, Histogram, Summary
+from prometheus_client import start_http_server, Counter, Gauge, Histogram, Summary, generate_latest, CONTENT_TYPE_LATEST
 import time
 import joblib
 import dagshub
@@ -264,7 +264,7 @@ async def startup_event():
     """
     logger.info("Starting Wine Quality Prediction API...")
     
-    # Memulai server Prometheus di port 8000
+    # Memulai server Prometheus di port 9092
     start_http_server(9092)
     logger.info("Prometheus metrics server started on port 9092")
     
@@ -420,6 +420,13 @@ def reload_model(new_run_id: Optional[str] = None):
         return {"status": "success", "message": "Model reloaded successfully", "model_type": model_type, "run_id": run_id}
     else:
         raise HTTPException(status_code=500, detail="Failed to reload model")
+
+@app.get("/metrics")
+def metrics():
+    """
+    Expose Prometheus metrics
+    """
+    return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)
 
 def main(args):
     """

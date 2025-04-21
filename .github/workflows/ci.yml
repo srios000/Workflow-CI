@@ -91,13 +91,34 @@ jobs:
       if: env.LATEST_RUN_ID != ''
       run: |
         cd MLProject
-        echo "FROM python:3.12.7-slim" > Dockerfile
-        echo "WORKDIR /app" >> Dockerfile
-        echo "COPY requirements.txt ." >> Dockerfile
-        echo "RUN pip install -r requirements.txt" >> Dockerfile
-        echo "COPY . ." >> Dockerfile
-        echo "EXPOSE 5000" >> Dockerfile
-        echo "CMD [\"python\", \"serve_model.py\", \"--run_id\", \"$LATEST_RUN_ID\", \"--port\", \"5000\"]" >> Dockerfile
+        cat > Dockerfile << EOF
+        FROM python:3.12.7-slim
+        
+        # Install Git and other required system dependencies
+        RUN apt-get update && \\
+            apt-get install -y git && \\
+            apt-get clean && \\
+            rm -rf /var/lib/apt/lists/*
+        
+        WORKDIR /app
+        
+        # Copy requirements and install dependencies
+        COPY requirements.txt .
+        RUN pip install --no-cache-dir -r requirements.txt
+        
+        # Copy application code
+        COPY . .
+        
+        # Expose ports for API and Prometheus
+        EXPOSE 5000 9092
+        
+        # Set environment variable to suppress Git warnings
+        ENV GIT_PYTHON_REFRESH=quiet
+        
+        # Run the serving script
+        CMD ["python", "serve_model.py", "--run_id", "$LATEST_RUN_ID", "--port", "5000"]
+        EOF
+        
         docker build -t wine-quality-predictor:latest .
     
     - name: Login to Docker Hub
