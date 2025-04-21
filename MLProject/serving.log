@@ -93,3 +93,31 @@ ModuleNotFoundError: No module named '_loss'
 2025-04-21 18:36:30,173 - wine_quality_serving - INFO - Scaler loaded successfully
 2025-04-21 18:36:30,174 - wine_quality_serving - INFO - Feature names loaded: ['fixed_acidity', 'volatile_acidity', 'citric_acid', 'residual_sugar', 'chlorides', 'free_sulfur_dioxide', 'total_sulfur_dioxide', 'density', 'pH', 'sulphates', 'alcohol']
 2025-04-21 18:36:30,175 - wine_quality_serving - INFO - Model loaded successfully in 6.37 seconds
+2025-04-21 19:06:32,586 - wine_quality_serving - INFO - Starting Wine Quality Prediction API...
+2025-04-21 19:06:32,604 - wine_quality_serving - INFO - Prometheus metrics server started on port 9092
+2025-04-21 19:06:32,605 - wine_quality_serving - INFO - Setting up MLflow connection...
+2025-04-21 19:06:32,605 - wine_quality_serving - INFO - Mengatur koneksi MLflow dengan DagsHub...
+2025-04-21 19:06:32,606 - wine_quality_serving - INFO - MLflow tracking URI set to: https://dagshub.com/srios000/wine_quality_mlops.mlflow
+2025-04-21 19:06:33,050 - wine_quality_serving - INFO - Koneksi MLflow dengan DagsHub berhasil
+2025-04-21 19:06:33,050 - wine_quality_serving - INFO - Using run_id: e5e2398175f14c628770e34f84c27025
+2025-04-21 19:06:33,050 - wine_quality_serving - INFO - Memuat model dari MLflow dengan run_id: e5e2398175f14c628770e34f84c27025
+2025-04-21 19:06:33,379 - wine_quality_serving - INFO - Run exists: e5e2398175f14c628770e34f84c27025, status: FINISHED
+2025-04-21 19:06:34,058 - wine_quality_serving - INFO - Artifacts in run: ['gb_feature_importance.csv', 'gradient_boosting_model']
+2025-04-21 19:06:34,058 - wine_quality_serving - INFO - Found model at path: gradient_boosting_model
+2025-04-21 19:06:34,059 - wine_quality_serving - INFO - Loading model from URI: runs:/e5e2398175f14c628770e34f84c27025/gradient_boosting_model
+2025-04-21 19:06:40,116 - wine_quality_serving - ERROR - Error loading model from MLflow: No module named '_loss'
+2025-04-21 19:06:40,118 - wine_quality_serving - ERROR - Traceback (most recent call last):
+  File "C:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\workflow-ci\MLProject\serve_model.py", line 188, in load_model
+    model = mlflow.sklearn.load_model(model_uri)
+  File "c:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\wine_quality_env\lib\site-packages\mlflow\sklearn\__init__.py", line 638, in load_model
+    return _load_model_from_local_file(
+  File "c:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\wine_quality_env\lib\site-packages\mlflow\sklearn\__init__.py", line 457, in _load_model_from_local_file
+    return cloudpickle.load(f)
+ModuleNotFoundError: No module named '_loss'
+
+2025-04-21 19:06:40,119 - wine_quality_serving - INFO - Creating a fallback model for testing...
+2025-04-21 19:06:40,165 - wine_quality_serving - INFO - Fallback model created successfully
+2025-04-21 19:06:40,166 - wine_quality_serving - INFO - Model loaded: RandomForestRegressor
+2025-04-21 19:06:40,175 - wine_quality_serving - INFO - Scaler loaded successfully
+2025-04-21 19:06:40,177 - wine_quality_serving - INFO - Feature names loaded: ['fixed_acidity', 'volatile_acidity', 'citric_acid', 'residual_sugar', 'chlorides', 'free_sulfur_dioxide', 'total_sulfur_dioxide', 'density', 'pH', 'sulphates', 'alcohol']
+2025-04-21 19:06:40,178 - wine_quality_serving - INFO - Model loaded successfully in 7.57 seconds
