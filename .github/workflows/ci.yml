@@ -81,7 +81,7 @@ jobs:
 
     - name: Upload model files to GitHub Artifacts
       if: env.LATEST_RUN_ID != ''
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: wine-quality-model-${{ env.LATEST_RUN_ID }}
         path: MLProject/models/
