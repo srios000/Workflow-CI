@@ -94,7 +94,6 @@ jobs:
         cat > Dockerfile << EOF
         FROM python:3.12.7-slim
         
-        # Install Git and other required system dependencies
         RUN apt-get update && \\
             apt-get install -y git && \\
             apt-get clean && \\
@@ -102,21 +101,16 @@ jobs:
         
         WORKDIR /app
         
-        # Copy requirements and install dependencies
         COPY requirements.txt .
         RUN pip install --no-cache-dir -r requirements.txt
         
-        # Copy application code
         COPY . .
         
-        # Expose ports for API and Prometheus
-        EXPOSE 5000 9092
+        EXPOSE 5000
         
-        # Set environment variable to suppress Git warnings
         ENV GIT_PYTHON_REFRESH=quiet
         
-        # Run the serving script
-        CMD ["python", "serve_model.py", "--run_id", "$LATEST_RUN_ID", "--port", "5000"]
+        CMD ["python", "serve_model.py", "--run_id", "07d9717f882448d6ae1ff567407044fd", "--port", "5000"]
         EOF
         
         docker build -t wine-quality-predictor:latest .
