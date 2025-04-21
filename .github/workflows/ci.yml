@@ -25,18 +25,30 @@ jobs:
       with:
         python-version: '3.12.7'
     
+    - name: Set up Conda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: wine_quality_env
+        python-version: '3.12.7'
+        auto-activate-base: false
+    
     - name: Check environment
+      shell: bash -l {0}
       run: |
         python --version
         pip --version
+        conda info
+        conda list
     
     - name: Install dependencies
+      shell: bash -l {0}
       run: |
         python -m pip install --upgrade pip
         pip install mlflow==2.19.0 dagshub==0.3.15 scikit-learn pandas numpy joblib
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     
     - name: Run MLflow project
+      shell: bash -l {0}
       env:
         MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
         MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
@@ -44,26 +56,38 @@ jobs:
         DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
       run: |
         cd MLProject
-        python -m mlflow run . -P tuning=true
+        # Run the Python script directly rather than using mlflow run
+        python modelling.py --data_path winequality_preprocessing --model_type random_forest --tuning true
     
     - name: Get latest MLflow run_id
+      shell: bash -l {0}
       run: |
         cd MLProject
-        LATEST_RUN_ID=$(cat best_tuned_model_run_id.txt)
-        echo "LATEST_RUN_ID=$LATEST_RUN_ID" >> $GITHUB_ENV
-        echo "Latest run ID: $LATEST_RUN_ID"
+        if [ -f best_tuned_model_run_id.txt ]; then
+          LATEST_RUN_ID=$(cat best_tuned_model_run_id.txt)
+          echo "LATEST_RUN_ID=$LATEST_RUN_ID" >> $GITHUB_ENV
+          echo "Latest run ID: $LATEST_RUN_ID"
+        elif [ -f best_model_run_id.txt ]; then
+          LATEST_RUN_ID=$(cat best_model_run_id.txt)
+          echo "LATEST_RUN_ID=$LATEST_RUN_ID" >> $GITHUB_ENV
+          echo "Latest run ID: $LATEST_RUN_ID"
+        else
+          echo "No run ID file found"
+        fi
     
     - name: Install Python dependencies for upload
+      shell: bash -l {0}
       run: pip install gdown
 
     - name: Upload to Google Drive
       if: env.LATEST_RUN_ID != ''
+      shell: bash -l {0}
       env:
         GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       run: |
         echo "$GDRIVE_CREDENTIALS_DATA" > credentials.json
         mkdir -p models_to_upload
-        cp MLProject/models/*_tuned_model.pkl models_to_upload/
+        cp MLProject/models/*_model.pkl models_to_upload/ || echo "No model files found"
         python -c "
         import gdown
         gdown.upload_folder('models_to_upload', id='${{ secrets.GDRIVE_FOLDER_ID }}', overwrite=True)
