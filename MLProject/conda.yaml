@@ -1,0 +1,20 @@
+name: wine_quality_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12.7
+  - pip=24.0
+  - pandas=2.2.0
+  - numpy=1.26.3
+  - scikit-learn=1.4.0
+  - matplotlib=3.8.2
+  - seaborn=0.13.1
+  - pip:
+    - mlflow==2.19.0
+    - dagshub==0.3.15
+    - ucimlrepo==0.0.3
+    - joblib==1.3.2
+    - fastapi==0.110.0
+    - uvicorn==0.28.0
+    - prometheus-client==0.19.0

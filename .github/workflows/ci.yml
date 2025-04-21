@@ -1,0 +1,117 @@
+name: Wine Quality MLOps CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Set up job
+      run: echo "Starting Wine Quality MLOps workflow..."
+    
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Set up Python 3.12.7
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12.7'
+    
+    - name: Check environment
+      run: |
+        python --version
+        pip --version
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mlflow==2.19.0 dagshub==0.3.15 scikit-learn pandas numpy joblib
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    
+    - name: Run MLflow project
+      env:
+        MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
+        MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
+        DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
+        DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+      run: |
+        cd MLProject
+        python -m mlflow run . -P tuning=true
+    
+    - name: Get latest MLflow run_id
+      run: |
+        cd MLProject
+        LATEST_RUN_ID=$(cat best_tuned_model_run_id.txt)
+        echo "LATEST_RUN_ID=$LATEST_RUN_ID" >> $GITHUB_ENV
+        echo "Latest run ID: $LATEST_RUN_ID"
+    
+    - name: Install Python dependencies for upload
+      run: pip install gdown
+
+    - name: Upload to Google Drive
+      if: env.LATEST_RUN_ID != ''
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+      run: |
+        echo "$GDRIVE_CREDENTIALS_DATA" > credentials.json
+        mkdir -p models_to_upload
+        cp MLProject/models/*_tuned_model.pkl models_to_upload/
+        python -c "
+        import gdown
+        gdown.upload_folder('models_to_upload', id='${{ secrets.GDRIVE_FOLDER_ID }}', overwrite=True)
+        "
+    
+    - name: Build Docker model
+      if: env.LATEST_RUN_ID != ''
+      run: |
+        cd MLProject
+        echo "FROM python:3.12.7-slim" > Dockerfile
+        echo "WORKDIR /app" >> Dockerfile
+        echo "COPY requirements.txt ." >> Dockerfile
+        echo "RUN pip install -r requirements.txt" >> Dockerfile
+        echo "COPY . ." >> Dockerfile
+        echo "EXPOSE 5000" >> Dockerfile
+        echo "CMD [\"python\", \"serve_model.py\", \"--run_id\", \"$LATEST_RUN_ID\", \"--port\", \"5000\"]" >> Dockerfile
+        docker build -t wine-quality-predictor:latest .
+    
+    - name: Login to Docker Hub
+      if: env.LATEST_RUN_ID != ''
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
+    - name: Tag Docker image
+      if: env.LATEST_RUN_ID != ''
+      run: |
+        docker tag wine-quality-predictor:latest ${{ secrets.DOCKERHUB_USERNAME }}/wine-quality-predictor:latest
+        docker tag wine-quality-predictor:latest ${{ secrets.DOCKERHUB_USERNAME }}/wine-quality-predictor:${{ env.LATEST_RUN_ID }}
+    
+    - name: Push Docker image
+      if: env.LATEST_RUN_ID != ''
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/wine-quality-predictor:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/wine-quality-predictor:${{ env.LATEST_RUN_ID }}
+    
+    - name: Post Login to Docker Hub
+      if: always()
+      run: echo "Docker image pushed successfully or workflow failed"
+    
+    - name: Post Set up Python 3.12.7
+      if: always()
+      run: echo "Workflow completed for Python 3.12.7"
+    
+    - name: Post Checkout repository
+      if: always()
+      run: echo "Repository processed successfully"
+    
+    - name: Complete job
+      run: echo "Wine Quality MLOps workflow completed"

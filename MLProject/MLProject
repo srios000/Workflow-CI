@@ -1,0 +1,27 @@
+name: wine_quality_prediction
+
+conda_env: conda.yaml
+
+entry_points:
+  main:
+    parameters:
+      data_path: {type: string, default: "winequality_preprocessing"}
+      model_type: {type: string, default: "random_forest"}
+      tuning: {type: bool, default: true}
+    command: "python modelling.py --data_path {data_path} --model_type {model_type} --tuning {tuning}"
+  
+  preprocess:
+    parameters:
+      output_dir: {type: string, default: "winequality_preprocessing"}
+    command: "python preprocessing.py --output_dir {output_dir}"
+  
+  tune:
+    parameters:
+      data_path: {type: string, default: "winequality_preprocessing"}
+    command: "python modelling_tuning.py --data_path {data_path}"
+  
+  serve:
+    parameters:
+      run_id: {type: string, default: null}
+      port: {type: int, default: 5000}
+    command: "python serve_model.py --run_id {run_id} --port {port}"
