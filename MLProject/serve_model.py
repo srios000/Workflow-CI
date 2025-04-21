@@ -9,6 +9,8 @@ dan monitoring dengan Prometheus
 """
 
 import os
+os.environ["GIT_PYTHON_REFRESH"] = "quiet"
+import git
 import argparse
 import logging
 import mlflow
