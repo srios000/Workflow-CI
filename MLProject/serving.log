@@ -1,0 +1,95 @@
+2025-04-21 18:05:38,089 - wine_quality_serving - INFO - Starting Wine Quality Prediction API...
+2025-04-21 18:07:00,688 - wine_quality_serving - INFO - Starting Wine Quality Prediction API...
+2025-04-21 18:07:00,739 - wine_quality_serving - INFO - Prometheus metrics server started on port 9092
+2025-04-21 18:07:00,743 - wine_quality_serving - INFO - Mengatur koneksi MLflow dengan DagsHub...
+2025-04-21 18:07:00,746 - wine_quality_serving - INFO - MLflow tracking URI set to: https://dagshub.com/srios000/wine_quality_mlops.mlflow
+2025-04-21 18:07:01,336 - wine_quality_serving - INFO - Koneksi MLflow dengan DagsHub berhasil
+2025-04-21 18:07:01,336 - wine_quality_serving - INFO - Memuat model dari MLflow dengan run_id: 
+2025-04-21 18:07:01,348 - wine_quality_serving - ERROR - Error loading model: Not a proper runs:/ URI: runs://model. Runs URIs must be of the form 'runs:/<run_id>/run-relative/path/to/artifact'
+2025-04-21 18:07:01,348 - wine_quality_serving - ERROR - Failed to load model at startup
+2025-04-21 18:20:08,000 - wine_quality_serving - INFO - Starting Wine Quality Prediction API...
+2025-04-21 18:20:08,030 - wine_quality_serving - INFO - Prometheus metrics server started on port 9092
+2025-04-21 18:20:08,031 - wine_quality_serving - INFO - Mengatur koneksi MLflow dengan DagsHub...
+2025-04-21 18:20:08,032 - wine_quality_serving - INFO - MLflow tracking URI set to: https://dagshub.com/srios000/wine_quality_mlops.mlflow
+2025-04-21 18:20:08,481 - wine_quality_serving - INFO - Koneksi MLflow dengan DagsHub berhasil
+2025-04-21 18:20:08,481 - wine_quality_serving - INFO - Memuat model dari MLflow dengan run_id: 
+2025-04-21 18:20:08,482 - wine_quality_serving - ERROR - Error loading model: Not a proper runs:/ URI: runs://model. Runs URIs must be of the form 'runs:/<run_id>/run-relative/path/to/artifact'
+2025-04-21 18:20:08,482 - wine_quality_serving - ERROR - Failed to load model at startup
+2025-04-21 18:24:11,385 - wine_quality_serving - INFO - Starting Wine Quality Prediction API...
+2025-04-21 18:24:11,408 - wine_quality_serving - INFO - Prometheus metrics server started on port 9092
+2025-04-21 18:24:11,409 - wine_quality_serving - INFO - Mengatur koneksi MLflow dengan DagsHub...
+2025-04-21 18:24:11,409 - wine_quality_serving - INFO - MLflow tracking URI set to: https://dagshub.com/srios000/wine_quality_mlops.mlflow
+2025-04-21 18:24:11,855 - wine_quality_serving - INFO - Koneksi MLflow dengan DagsHub berhasil
+2025-04-21 18:24:11,856 - wine_quality_serving - INFO - Memuat model dari MLflow dengan run_id: e95cfe394ba8475ab7f6f11895536f7c
+2025-04-21 18:25:15,869 - wine_quality_serving - ERROR - Error loading model: The following failures occurred while downloading one or more artifacts from https://dagshub.com/srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts:
+##### File model #####
+API request to https://dagshub.com/srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts/model failed with exception HTTPSConnectionPool(host='dagshub.com', port=443): Max retries exceeded with url: /srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts/model (Caused by ResponseError('too many 500 error responses'))
+2025-04-21 18:25:15,870 - wine_quality_serving - ERROR - Failed to load model at startup
+2025-04-21 18:25:48,268 - wine_quality_serving - INFO - Starting Wine Quality Prediction API...
+2025-04-21 18:25:48,301 - wine_quality_serving - INFO - Prometheus metrics server started on port 9092
+2025-04-21 18:25:48,301 - wine_quality_serving - INFO - Mengatur koneksi MLflow dengan DagsHub...
+2025-04-21 18:25:48,303 - wine_quality_serving - INFO - MLflow tracking URI set to: https://dagshub.com/srios000/wine_quality_mlops.mlflow
+2025-04-21 18:25:48,776 - wine_quality_serving - INFO - Koneksi MLflow dengan DagsHub berhasil
+2025-04-21 18:25:48,776 - wine_quality_serving - INFO - Memuat model dari MLflow dengan run_id: e95cfe394ba8475ab7f6f11895536f7c
+2025-04-21 18:26:53,271 - wine_quality_serving - ERROR - Error loading model: The following failures occurred while downloading one or more artifacts from https://dagshub.com/srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts:
+##### File model #####
+API request to https://dagshub.com/srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts/model failed with exception HTTPSConnectionPool(host='dagshub.com', port=443): Max retries exceeded with url: /srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts/model (Caused by ResponseError('too many 500 error responses'))
+2025-04-21 18:26:53,272 - wine_quality_serving - ERROR - Failed to load model at startup
+2025-04-21 18:31:20,890 - wine_quality_serving - INFO - Starting Wine Quality Prediction API...
+2025-04-21 18:31:20,921 - wine_quality_serving - INFO - Prometheus metrics server started on port 9092
+2025-04-21 18:31:20,923 - wine_quality_serving - INFO - Setting up MLflow connection...
+2025-04-21 18:31:20,924 - wine_quality_serving - INFO - Mengatur koneksi MLflow dengan DagsHub...
+2025-04-21 18:31:20,924 - wine_quality_serving - INFO - MLflow tracking URI set to: https://dagshub.com/srios000/wine_quality_mlops.mlflow
+2025-04-21 18:31:21,360 - wine_quality_serving - INFO - Koneksi MLflow dengan DagsHub berhasil
+2025-04-21 18:31:21,360 - wine_quality_serving - INFO - Using run_id: e95cfe394ba8475ab7f6f11895536f7c
+2025-04-21 18:31:21,360 - wine_quality_serving - INFO - Memuat model dari MLflow dengan run_id: e95cfe394ba8475ab7f6f11895536f7c
+2025-04-21 18:31:21,361 - wine_quality_serving - INFO - Model URI: runs:/e95cfe394ba8475ab7f6f11895536f7c/model
+2025-04-21 18:31:21,711 - wine_quality_serving - INFO - Run exists: e95cfe394ba8475ab7f6f11895536f7c, status: FINISHED
+2025-04-21 18:31:23,042 - wine_quality_serving - INFO - Artifacts in run: ['gb_feature_importance.csv', 'gradient_boosting_model']
+2025-04-21 18:32:28,715 - wine_quality_serving - ERROR - Error loading model from MLflow: The following failures occurred while downloading one or more artifacts from https://dagshub.com/srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts:
+##### File model #####
+API request to https://dagshub.com/srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts/model failed with exception HTTPSConnectionPool(host='dagshub.com', port=443): Max retries exceeded with url: /srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts/model (Caused by ResponseError('too many 500 error responses'))
+2025-04-21 18:32:28,730 - wine_quality_serving - ERROR - Traceback (most recent call last):
+  File "C:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\Workflow-CI\MLProject\serve_model.py", line 167, in load_model
+    model = mlflow.sklearn.load_model(model_uri)
+  File "C:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\wine_quality_env\lib\site-packages\mlflow\sklearn\__init__.py", line 633, in load_model
+    local_model_path = _download_artifact_from_uri(artifact_uri=model_uri, output_path=dst_path)
+  File "C:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\wine_quality_env\lib\site-packages\mlflow\tracking\artifact_utils.py", line 116, in _download_artifact_from_uri
+    return repo.download_artifacts(artifact_path=artifact_path, dst_path=output_path)
+  File "C:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\wine_quality_env\lib\site-packages\mlflow\store\artifact\runs_artifact_repo.py", line 131, in download_artifacts
+    return self.repo.download_artifacts(artifact_path, dst_path)
+  File "C:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\wine_quality_env\lib\site-packages\mlflow\store\artifact\artifact_repo.py", line 302, in download_artifacts
+    raise MlflowException(
+mlflow.exceptions.MlflowException: The following failures occurred while downloading one or more artifacts from https://dagshub.com/srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts:
+##### File model #####
+API request to https://dagshub.com/srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts/model failed with exception HTTPSConnectionPool(host='dagshub.com', port=443): Max retries exceeded with url: /srios000/wine_quality_mlops.mlflow/api/2.0/mlflow-artifacts/artifacts/c8a755bd101349fc905301fbb5a6d947/e95cfe394ba8475ab7f6f11895536f7c/artifacts/model (Caused by ResponseError('too many 500 error responses'))
+
+2025-04-21 18:32:28,732 - wine_quality_serving - ERROR - Failed to load model at startup
+2025-04-21 18:36:23,797 - wine_quality_serving - INFO - Starting Wine Quality Prediction API...
+2025-04-21 18:36:23,810 - wine_quality_serving - INFO - Prometheus metrics server started on port 9092
+2025-04-21 18:36:23,810 - wine_quality_serving - INFO - Setting up MLflow connection...
+2025-04-21 18:36:23,810 - wine_quality_serving - INFO - Mengatur koneksi MLflow dengan DagsHub...
+2025-04-21 18:36:23,811 - wine_quality_serving - INFO - MLflow tracking URI set to: https://dagshub.com/srios000/wine_quality_mlops.mlflow
+2025-04-21 18:36:24,207 - wine_quality_serving - INFO - Koneksi MLflow dengan DagsHub berhasil
+2025-04-21 18:36:24,207 - wine_quality_serving - INFO - Using run_id: e95cfe394ba8475ab7f6f11895536f7c
+2025-04-21 18:36:24,207 - wine_quality_serving - INFO - Memuat model dari MLflow dengan run_id: e95cfe394ba8475ab7f6f11895536f7c
+2025-04-21 18:36:24,543 - wine_quality_serving - INFO - Run exists: e95cfe394ba8475ab7f6f11895536f7c, status: FINISHED
+2025-04-21 18:36:25,272 - wine_quality_serving - INFO - Artifacts in run: ['gb_feature_importance.csv', 'gradient_boosting_model']
+2025-04-21 18:36:25,273 - wine_quality_serving - INFO - Found model at path: gradient_boosting_model
+2025-04-21 18:36:25,273 - wine_quality_serving - INFO - Loading model from URI: runs:/e95cfe394ba8475ab7f6f11895536f7c/gradient_boosting_model
+2025-04-21 18:36:30,130 - wine_quality_serving - ERROR - Error loading model from MLflow: No module named '_loss'
+2025-04-21 18:36:30,133 - wine_quality_serving - ERROR - Traceback (most recent call last):
+  File "C:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\Workflow-CI\MLProject\serve_model.py", line 188, in load_model
+    model = mlflow.sklearn.load_model(model_uri)
+  File "C:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\wine_quality_env\lib\site-packages\mlflow\sklearn\__init__.py", line 638, in load_model
+    return _load_model_from_local_file(
+  File "C:\Users\Rio\projects\dicoding\MLops\SMSML_Sintario-Satya\Eksperimen_SML_Sintario-Satya\wine_quality_env\lib\site-packages\mlflow\sklearn\__init__.py", line 457, in _load_model_from_local_file
+    return cloudpickle.load(f)
+ModuleNotFoundError: No module named '_loss'
+
+2025-04-21 18:36:30,133 - wine_quality_serving - INFO - Creating a fallback model for testing...
+2025-04-21 18:36:30,164 - wine_quality_serving - INFO - Fallback model created successfully
+2025-04-21 18:36:30,165 - wine_quality_serving - INFO - Model loaded: RandomForestRegressor
+2025-04-21 18:36:30,173 - wine_quality_serving - INFO - Scaler loaded successfully
+2025-04-21 18:36:30,174 - wine_quality_serving - INFO - Feature names loaded: ['fixed_acidity', 'volatile_acidity', 'citric_acid', 'residual_sugar', 'chlorides', 'free_sulfur_dioxide', 'total_sulfur_dioxide', 'density', 'pH', 'sulphates', 'alcohol']
+2025-04-21 18:36:30,175 - wine_quality_serving - INFO - Model loaded successfully in 6.37 seconds
